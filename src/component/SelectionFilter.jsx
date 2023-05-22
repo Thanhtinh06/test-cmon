@@ -23,7 +23,7 @@ const SelectionFilter = (props) => {
   };
 
   const handleReset = () => {
-    selectRef.current.selectedIndex = 0; // Reset the selectedIndex to 0
+    selectRef.current.selectedIndex = ""; // Reset the selectedIndex to ""
   };
 
   useEffect(() => {

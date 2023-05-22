@@ -37,15 +37,6 @@ const teams = (() => {
   return result;
 })();
 
-const getFilter = (list, valueTeam, valuePosition) => {
-  list = list.filter((player) => {
-    const teamMatch = !valueTeam || valueTeam === player.team;
-    const positionMatch =
-      !valuePosition || player.positions.includes(valuePosition);
-    return teamMatch && positionMatch;
-  });
-};
-
 const initialState = {
   playerArray,
   positions,
@@ -69,7 +60,7 @@ export const { reducer: managePlayerReducer, actions: managePlayerActions } =
       },
       filter: (state, action) => {
         const { teams, positions } = action.payload;
-        state.resetFilter = false
+        state.resetFilter = false;
 
         state.playerArray = playerArray.filter((player) => {
           const teamMatch = !teams || teams === player.team;
@@ -77,6 +68,10 @@ export const { reducer: managePlayerReducer, actions: managePlayerActions } =
             !positions || player.positions.includes(positions);
           return teamMatch && positionMatch;
         });
+        console.log("pos-i", state.filterPosition);
+        console.log("team-i", state.filterTeam);
+        console.log("arr-i", state.playerArray);
+        console.log("search-i", state.search);
 
         //if input search has value
 
@@ -90,6 +85,9 @@ export const { reducer: managePlayerReducer, actions: managePlayerActions } =
         state.filterTeam = "";
         state.filterPosition = "";
         state.resetFilter = true;
+        console.log("pos", state.filterPosition);
+        console.log("team", state.filterTeam);
+        console.log("arr", state.playerArray);
       },
       search: (state, action) => {
         const { filterTeam, filterPosition } = state;
@@ -101,7 +99,6 @@ export const { reducer: managePlayerReducer, actions: managePlayerActions } =
 
         //if filters have value
         if (filterTeam || filterPosition) {
-          getFilter(state.playerArray, filterTeam, filterPosition);
           state.playerArray = state.playerArray.filter((player) => {
             const teamMatch = !filterTeam || filterTeam === player.team;
             const positionMatch =
