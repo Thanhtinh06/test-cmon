@@ -68,10 +68,6 @@ export const { reducer: managePlayerReducer, actions: managePlayerActions } =
             !positions || player.positions.includes(positions);
           return teamMatch && positionMatch;
         });
-        console.log("pos-i", state.filterPosition);
-        console.log("team-i", state.filterTeam);
-        console.log("arr-i", state.playerArray);
-        console.log("search-i", state.search);
 
         //if input search has value
 
